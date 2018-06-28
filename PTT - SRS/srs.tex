@@ -171,13 +171,8 @@ or object class diagram, is often effective.$>$
 
 \section{User Classes and Characteristics}
 \begin{CJK}{UTF8}{<font>}
-$<$Identify the various user classes that you anticipate will use this product.  
-User classes may be differentiated based on frequency of use, subset of product 
-functions used, technical expertise, security or privilege levels, educational 
-level, or experience. Describe the pertinent characteristics of each user class.  
-Certain requirements may pertain only to certain user classes. Distinguish the 
-most important user classes for this product from those who are less important 
-to satisfy.$>$
+本line bot預期的主要用戶為年輕人、line的中文用戶，因此本line bot推薦的音樂主要
+為中文及英文的流行歌曲，並且在輸入方面也要求中文輸入。
 \end{CJK}
 
 \section{Operating Environment}
@@ -316,12 +311,11 @@ REQ-1:	REQ-2:
 
 \section{Performance Requirements}
 \begin{CJK}{UTF8}{<font>}
-$<$If there are performance requirements for the product under various 
-circumstances, state them here and explain their rationale, to help the 
-developers understand the intent and make suitable design choices. Specify the 
-timing relationships for real time systems. Make such requirements as specific 
-as possible. You may need to state performance requirements for individual 
-functional requirements or features.$>$
+由於本程式的將伺服器建置在heroku的免費平台上，因此，倘若在30分鐘以內皆無使
+用者對此程式進行輸入，則伺服器會自動關機，並在下一次接收到輸入時才重新啟動，所
+以使用者第一次輸入時可能會有5~10秒的延遲時間。另外，因本程式在伺服器端主要運算
+皆仰賴於爬蟲，所以如果同始有多位使用者進行輸入會造成伺服器頻繁的項目標網站送出
+請求，可能會導致伺服器產生錯誤，無法正確回應使用者。
 \end{CJK}
 
 \section{Safety Requirements}
