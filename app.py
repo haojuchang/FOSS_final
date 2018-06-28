@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+import jieba
 import sys
 sys.path.append("./assest")
 import youtube
@@ -62,6 +62,13 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=text))
+        return 0
+    if text.find('<') != -1:
+        seg_list = jieba.cut("我来到北京清华大学", cut_all=True)
+        str = "/".join(seg_list)
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=str))
         return 0
 
     if text.find('Y<<') != -1:
