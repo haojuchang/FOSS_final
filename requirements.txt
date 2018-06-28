@@ -2,3 +2,4 @@ line-bot-sdk
 flask
 beautifulsoup4==4.5.3
 jieba
+selenium
