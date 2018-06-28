@@ -22,6 +22,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{CJKutf8}
+\usepackage{graphicx}
 \hypersetup{
     bookmarks=false,    % show bookmarks bar?
     pdftitle={Software Requirement Specification},    % title
@@ -115,7 +116,7 @@ each reader type.$>$
 使用的軟件分別是Microsoft Azure和Line Bot。
 Microsoft Azure 中的文字分析的功用是可以對輸入文字進行情緒分析，
 這API會為這句文字計算出一個心情數值由０到１之間，愈小表示心情愈不好，相反愈大表示愈開心。
-而Line Bot是Line提供的Messaging API，可以與機器人進行構通。
+而Line Bot是Line提供的API，可以與機器人進行構通。
 為了達到產品可用音樂改善使用者的心情的這目的，而結合這兩項軟件。
 使用者利用Line Bot去傳信息給機械人並把收到的文字用Azure的文字分析得到使用者心情
 再從歌單中選出音樂推薦傳送給使用者。
@@ -136,6 +137,8 @@ Microsoft Azure 中的文字分析的功用是可以對輸入文字進行情緒�
 	https://yaoandy107.github.io/line-bot-tutorial/  
 	\item  \textbf {文字分析API | Microsoft Azure}  \newline
 	https://azure.microsoft.com/zh-tw/services/cognitive-services/text-analytics/
+	\item  \textbf { LINE BOT 通訊}  \newline
+	https://engineering.linecorp.com/tw/blog/detail/183
 \end{enumerate}
 %$<$List any other documents or Web addresses to which this SRS refers. These may  include user interface style guides, contracts, standards, system requirements specifications, use case documents, or a vision and scope document. Provide enough information so that the reader could access a copy of each reference, including title, author, version number, date, and source or location.$>$
 \end{CJK}
@@ -251,12 +254,11 @@ implementation constraint.$>$
 
 \section{Communications Interfaces}
 \begin{CJK}{UTF8}{<font>}
-$<$Describe the requirements associated with any communications functions 
-required by this product, including e-mail, web browser, network server 
-communications protocols, electronic forms, and so on. Define any pertinent 
-message formatting. Identify any communication standards that will be used, such 
-as FTP or HTTP. Specify any communication security or encryption issues, data 
-transfer rates, and synchronization mechanisms.$>$
+User使用Line Bot前端介面輸入訊息後，Line平台為了通訊的安全問題，資料都要會透過加密通道。
+所以在架Messaging API的Webhook時,一定是用HTTPS來進行通訊協定。
+而訊息傳出後經過根據Webhook URL（即Heroku的domain位置），通過Message API把訊息導到後端Heroku處理，
+用HTTPS傳回到Message API，Heroku會根據Line Bot的Channel secret及Channel access token兩個key知道是哪個Line Bot
+最後把訊息再發到平台上回覆使用者。
 \end{CJK}
 
 
