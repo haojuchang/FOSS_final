@@ -12,6 +12,10 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 
+import sys
+sys.path.append("./assest")
+import youtube
+
 app = Flask(__name__)
 
 line_bot_api = LineBotApi('RIMmaonvD7Bi/W4guIsCuwrLAXFqtHgYFWmF+/c8mIgnF7FzZsScZLVF223lEJH2jdbpyM/+NXn0oJSbWpZGrIDEwfu/qv6GTd/GCs0yFGhPIuEtIMkgQczguukg60DnOyv9xLF1NIvjxDlqwyMwbQdB04t89/1O/w1cDnyilFU=') #Your Channel Access Token
