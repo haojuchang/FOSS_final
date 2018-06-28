@@ -56,7 +56,37 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text=text))
         return 0
-
+	
+	if event.message.text.find('Y<<') != -1:
+        song = youtube.youtube()
+        song_data = song.search(event.message.text)
+        
+        carousel_template = CarouselTemplate(columns=[
+            CarouselColumn(
+                text=song_data[0][0],
+                actions=[ URITemplateAction(label = 'Watch it !!', uri = song_data[1][0]) ]
+            ),
+            CarouselColumn(
+                text=song_data[0][1],
+                actions=[ URITemplateAction(label = 'Watch it !!', uri = song_data[1][1]) ]
+            ),
+            CarouselColumn(
+                text=song_data[0][2],
+                actions=[ URITemplateAction(label = 'Watch it !!', uri = song_data[1][2]) ]
+            ),
+            CarouselColumn(
+                text=song_data[0][3],
+                actions=[ URITemplateAction(label = 'Watch it !!', uri = song_data[1][3]) ]
+            ),
+            CarouselColumn(
+                text=song_data[0][4],
+                actions=[ URITemplateAction(label = 'Watch it !!', uri = song_data[1][4]) ]
+            ),            
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='Carousel alt text', template=carousel_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+        return 0
 
     buttons_template = TemplateSendMessage(
         alt_text='目錄 template',
