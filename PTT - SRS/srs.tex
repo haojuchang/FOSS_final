@@ -112,10 +112,14 @@ each reader type.$>$
 
 \section{Project Scope}
 \begin{CJK}{UTF8}{<font>}
-$<$Provide a short description of the software being specified and its purpose, 
-including relevant benefits, objectives, and goals. Relate the software to 
-corporate goals or business strategies. If a separate vision and scope document 
-is available, refer to it rather than duplicating its contents here.$>$
+使用的軟件分別是Microsoft Azure和Line Bot。
+Microsoft Azure 中的文字分析的功用是可以對輸入文字進行情緒分析，
+這API會為這句文字計算出一個心情數值由０到１之間，愈小表示心情愈不好，相反愈大表示愈開心。
+而Line Bot是Line提供的Messaging API，可以與機器人進行構通。
+為了達到產品可用音樂改善使用者的心情的這目的，而結合這兩項軟件。
+使用者利用Line Bot去傳信息給機械人並把收到的文字用Azure的文字分析得到使用者心情
+再從歌單中選出音樂推薦傳送給使用者。
+%$<$Provide a short description of the software being specified and its purpose, including relevant benefits, objectives, and goals. Relate the software to corporate goals or business strategies. If a separate vision and scope document is available, refer to it rather than duplicating its contents here.$>$
 \end{CJK}
 
 \section{References}
