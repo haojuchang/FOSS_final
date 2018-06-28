@@ -62,8 +62,8 @@ def handle_message(event):
         return 0
 
     if text.find('Y<<') != -1:
-        song = youtube.youtube();
-	song_data = song.search(event.message.text)
+        song = youtube.youtube()
+	song_data = song.search(text)
 	carousel_template = CarouselTemplate(columns=[
             CarouselColumn(
                 text=song_data[0][0],
