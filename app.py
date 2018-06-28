@@ -61,7 +61,7 @@ def handle_message(event):
             TextSendMessage(text=text))
         return 0
 
-	if event.message.text.find('Y<<') != -1:
+	if text.find('Y<<') != -1	:
 		song = youtube.youtube();
 		song_data = song.search(event.message.text)
 		
