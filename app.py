@@ -1,4 +1,5 @@
 # encoding: utf-8
+from linebot.models import *
 from flask import Flask, request, abort
 
 from linebot import (
@@ -34,13 +35,53 @@ def callback():
     return 'OK'
 
 @handler.add(MessageEvent, message=TextMessage)
-def handle_text_message(event):
-    text = event.message.text + 'foss'#message from user
+def handle_message(event):
+    text = event.message.text #message from user
 
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=text)) #reply the same message from user
-    
+    if text == "搜歌模式":
+        text = "此模式可以推薦你想要的歌手的歌曲"
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=text))
+        return 0
+    if text == "心情模式":
+        text = "我們會根據你的心情指數來推薦歌曲"
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=text))
+        return 0
+    if text == "關於我們":
+        text = "吳泰德\n羅皓煒\n張皓儒\n劉泳儀\n白恬安"
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=text))
+        return 0
+
+
+    buttons_template = TemplateSendMessage(
+        alt_text='目錄 template',
+        template=ButtonsTemplate(
+            title='請選擇以下服務',
+            text='點選顯示介紹',
+            thumbnail_image_url='https://storage.googleapis.com/biggg/f48c6734853348ff9f9f473f6d640ef1.gif',
+            actions=[
+                MessageTemplateAction(
+                    label='搜歌模式',
+                    text='搜歌模式'
+                ),
+                MessageTemplateAction(
+                    label='心情模式',
+                    text='心情模式'
+                ),
+                MessageTemplateAction(
+                    label='關於我們',
+                    text='關於我們'
+                )
+            ]
+        )
+    )
+    line_bot_api.reply_message(event.reply_token, buttons_template)
+
 
 import os
 if __name__ == "__main__":
