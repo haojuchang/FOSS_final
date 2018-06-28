@@ -12,7 +12,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 
-import sys
+import 	
 sys.path.append("./assest")
 import youtube
 
@@ -61,7 +61,7 @@ def handle_message(event):
             TextSendMessage(text=text))
         return 0
 
-	if text.find('Y<<') != -1:
+	if text.find('Y<<') != (-1):
 		song = youtube.youtube()
 		song_data = song.search(event.message.text)
 		
@@ -87,8 +87,7 @@ def handle_message(event):
 				actions=[ URITemplateAction(label = 'Watch it !!', uri = song_data[1][4]) ]
 			),            
 		])
-		template_message = TemplateSendMessage(
-			alt_text='Carousel alt text', template=carousel_template)
+		template_message = TemplateSendMessage(alt_text='Carousel alt text', template=carousel_template)
 		line_bot_api.reply_message(event.reply_token, template_message)
 		return 0
 
