@@ -4,7 +4,6 @@ import sys
 import random
 sys.path.append("./assest")
 import youtube
-import talk
 from linebot.models import *
 from flask import Flask, request, abort
 
@@ -68,13 +67,21 @@ def handle_message(event):
             TextSendMessage(text=text))
         return 0
 
-    t = talk(text)
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=t.singer))
-    '''if t.istalk == True:
+    temp = -1
+    if text.find('聽') != -1 :
+        temp = text.find('聽')
+    elif text.find('找') != -1:
+        temp = text.find('找')
+    elif text.find('看') != -1 :
+        temp = text.find('看')
+    elif text.find('要') != -1 :
+        temp = text.find('要')
+    elif text.find('listen') != -1:
+        temp = text.find('listem')
+
+    if temp != -1:
         song = youtube.youtube()
-        song_data = song.search(t.singer)
+        song_data = song.search(text[temp:])
         carousel_template = CarouselTemplate(columns=[
             CarouselColumn(
                 text=song_data[0][0],
@@ -99,7 +106,7 @@ def handle_message(event):
         ])
         template_message = TemplateSendMessage(alt_text='Carousel alt text', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
-        return 0'''
+        return 0
 
     songs = [[], [], []]
     inFile = open("song1.txt", "r")
