@@ -1,6 +1,7 @@
 # encoding: utf-8
 import jieba
 import sys
+import random
 sys.path.append("./assest")
 import youtube
 from linebot.models import *
