@@ -126,14 +126,14 @@ def handle_message(event):
     )	
     line_bot_api.reply_message(event.reply_token, buttons_template)
 
-	translater = GoogleTranslater()
-	determiner = MoodDeterminer()
+    translater = GoogleTranslater()
+    determiner = MoodDeterminer()
 	
-	translater.sendText(text)
-	receive = translater.getText()
-	
-	determiner.sendText(receive)
-	result = determiner.getText()
+    translater.sendText(text)
+    receive = translater.getText()
+
+    determiner.sendText(receive)
+    result = determiner.getText()
 
 import os
 if __name__ == "__main__":
