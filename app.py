@@ -69,7 +69,10 @@ def handle_message(event):
         return 0
 
     t = talk(text)
-    if t.istalk == True:
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=t.singer))
+    '''if t.istalk == True:
         song = youtube.youtube()
         song_data = song.search(t.singer)
         carousel_template = CarouselTemplate(columns=[
@@ -96,7 +99,7 @@ def handle_message(event):
         ])
         template_message = TemplateSendMessage(alt_text='Carousel alt text', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
-        return 0
+        return 0'''
 
     songs = [[], [], []]
     inFile = open("song1.txt", "r")
