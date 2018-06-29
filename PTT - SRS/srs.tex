@@ -88,7 +88,7 @@
 
 \section{Purpose}
 \begin{CJK}{UTF8}{<font>}
-藉Line Bot系統實現根據使用者回傳的對話內容關鍵字，判斷使用者當下心情，並回傳相應的心情歌曲給使用者。希望透過與我們的Line Bot可以以音樂去安慰不開心的人，同時也可以讓開心的有更好的心情。另外藉由對話中出現的歌手名稱，可隨機推薦該歌手的影片MV連結。這是此程式的第一個版本，可以自己運作的主程式，而不是其他程式的部分元件。
+        藉Line Bot系統實現根據使用者回傳的對話內容關鍵字，判斷使用者當下心情，並回傳相應的心情歌曲給使用者。希望透過與我們的Line Bot可以以音樂去安慰不開心的人，同時也可以讓開心的有更好的心情。另外藉由對話中出現的歌手名稱，可隨機推薦該歌手的影片MV連結。這是此程式的第一個版本，可以自己運作的主程式，而不是其他程式的部分元件。
 %$<$Identify the product whose software requirements are specified in this  document指出即將被書寫在這份軟體說明書的產品是甚麼, including the revision or release number與其更改或釋出版本. Describe the scope of the product that is covered by this SRS, particularly if this SRS describes only part of the system or a single subsystem.說明這個產品的範圍。他是獨立的系統還是某個系統的部分元件$
 \end{CJK}
 
@@ -103,7 +103,7 @@ is to have its own priority.$>$
 
 \section{Intended Audience and Reading Suggestions}
 \begin{CJK}{UTF8}{<font>}
-$<$Describe the different types of reader that the document is intended for, 
+       $<$Describe the different types of reader that the document is intended for, 
 such as developers, project managers, marketing staff, users, testers, and 
 documentation writers. Describe what the rest of this SRS contains and how it is 
 organized. Suggest a sequence for reading the document, beginning with the 
@@ -113,12 +113,12 @@ each reader type.$>$
 
 \section{Project Scope}
 \begin{CJK}{UTF8}{<font>}
-使用的軟件分別是Microsoft Azure和Line Bot。
+        使用的軟件分別是Microsoft Azure和Line Bot。
 Microsoft Azure 中的文字分析的功用是可以對輸入文字進行情緒分析，
 這API會為這句文字計算出一個心情數值由０到１之間，愈小表示心情愈不好，相反愈大表示愈開心。
 而Line Bot是Line提供的API，可以與機器人進行構通。
 為了達到產品可用音樂改善使用者的心情的這目的，而結合這兩項軟件。
-使用者利用Line Bot去傳信息給機械人並把收到的文字用Azure的文字分析得到使用者心情
+任何人在任何時間都可以利用Line Bot去傳信息給機械人並把收到的文字用Azure的文字分析得到使用者心情
 再從歌單中選出音樂推薦傳送給使用者。
 %$<$Provide a short description of the software being specified and its purpose, including relevant benefits, objectives, and goals. Relate the software to corporate goals or business strategies. If a separate vision and scope document is available, refer to it rather than duplicating its contents here.$>$
 \end{CJK}
@@ -175,7 +175,7 @@ or object class diagram, is often effective.$>$
 \section{User Classes and Characteristics}
 \begin{CJK}{UTF8}{<font>}
 本line bot預期的主要用戶為年輕人、line的中文用戶，因此本line bot推薦的音樂主要
-為中文及英文的流行歌曲，並且在輸入方面也要求中文輸入。
+為中文的流行歌曲，並且在輸入方面也要求中文輸入。
 \end{CJK}
 
 \section{Operating Environment}
@@ -202,9 +202,10 @@ software).$>$
 $<$List the user documentation components (such as user manuals, on-line help, 
 and tutorials) that will be delivered along with the software. Identify any 
 known user documentation delivery formats or standards.$>$
-\section{Assumptions and Dependencies}
 \end{CJK}
 
+\section{Assumptions and Dependencies}
+\begin{CJK}{UTF8}{<font>}
 $<$List any assumed factors (as opposed to known facts) that could affect the 
 requirements stated in the SRS. These could include third-party or commercial 
 components that you plan to use, issues around the development or operating 
@@ -213,7 +214,7 @@ are incorrect, are not shared, or change. Also identify any dependencies the
 project has on external factors, such as software components that you intend to 
 reuse from another project, unless they are already documented elsewhere (for 
 example, in the vision and scope document or the project plan).$>$
-
+\end{CJK}
 
 \chapter{External Interface Requirements}
 
@@ -258,7 +259,7 @@ User使用Line Bot前端介面輸入訊息後，Line平台為了通訊的安全�
 所以在架Messaging API的Webhook時,一定是用HTTPS來進行通訊協定。
 而訊息傳出後經過根據Webhook URL（即Heroku的domain位置），通過Message API把訊息導到後端Heroku處理，
 用HTTPS傳回到Message API，Heroku會根據Line Bot的Channel secret及Channel access token兩個key知道是哪個Line Bot
-最後把訊息再發到平台上回覆使用者。
+最後把訊息再發到平台上回覆使用者。[5]
 \end{CJK}
 
 
