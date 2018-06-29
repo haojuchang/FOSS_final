@@ -102,8 +102,6 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, template_message)
         return 0
 
-    line_bot_api.reply_message(event.reply_token, buttons_template)
-
     translater = GoogleTranslater()
     determiner = MoodDeterminer()
 	
@@ -138,7 +136,9 @@ def handle_message(event):
                 )
             ]
         )
-    )	
+    )
+
+    line_bot_api.reply_message(event.reply_token, buttons_template)
 
 import os
 if __name__ == "__main__":
