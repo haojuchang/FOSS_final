@@ -130,13 +130,12 @@ def handle_message(event):
     result = int(determiner.getText()[:-1])
 
     mood = "開心的歌"
-	
     sug = 2
+    if result < 66:
+        sug = 1
+        mood = "一般的歌"	
     if result < 33:
         sug = 0
-        mood = "一般的歌"	
-    elif result < 66:
-        sug = 1
         mood = "不爽的歌"
 	
     buttons_template = TemplateSendMessage(
