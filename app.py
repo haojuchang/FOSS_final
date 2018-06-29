@@ -102,6 +102,17 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, template_message)
         return 0
 
+    line_bot_api.reply_message(event.reply_token, buttons_template)
+
+    translater = GoogleTranslater()
+    determiner = MoodDeterminer()
+	
+    translater.sendText(text)
+    receive = translater.getText()
+
+    determiner.sendText(receive)
+    result = determiner.getText()
+
     buttons_template = TemplateSendMessage(
         alt_text='目錄 template',
         template=ButtonsTemplate(
@@ -120,20 +131,14 @@ def handle_message(event):
                 MessageTemplateAction(
                     label='關於我們',
                     text='關於我們'
+                ),
+		MessageTemplateAction(
+                    label='心情',
+                    text=result
                 )
             ]
         )
     )	
-    line_bot_api.reply_message(event.reply_token, buttons_template)
-
-    translater = GoogleTranslater()
-    determiner = MoodDeterminer()
-	
-    translater.sendText(text)
-    receive = translater.getText()
-
-    determiner.sendText(receive)
-    result = determiner.getText()
 
 import os
 if __name__ == "__main__":
