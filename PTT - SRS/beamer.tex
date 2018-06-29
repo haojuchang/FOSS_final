@@ -101,7 +101,7 @@
 \usepackage{CJKutf8}
 \usepackage{hyperref}
 \usepackage{pgf-umlcd}
-
+\usepackage{comment}
 
 %----------------------------------------------------------------------------------------
 %   TITLE PAGE
@@ -136,9 +136,9 @@
 
 \begin{frame}
 
-\frametitle{專題想法說明} % Table of contents slide, comment this block out to remove it
+\frametitle{專題目標說明} % Table of contents slide, comment this block out to remove it
 \begin{block}{目標1}
-根據使用者在對話框輸入的文字，用演算法判斷對方當下的心情、情緒如何。藉由分成三種情緒，Happy、Normal、Sad，自對應歌曲庫隨機回傳一首歌的連結。此部分希望可以達到撫慰使用者情緒的目的。
+根據使用者在對話框輸入的文字，用Microsoft Azure所提供的API判斷對方當下的心情、情緒如何。藉由分成三種情緒，Happy、Normal、Sad，自對應歌曲庫隨機回傳一首歌的連結。此部分希望可以達到撫慰使用者情緒的目的。
 \end{block}
 
 \begin{block}{目標2}
@@ -156,15 +156,33 @@
 %\subsection{\large 程式解說}
 %\subsection{\large 實作結果呈現}
 
+
 \begin{frame}
-\frametitle{程式函數架構圖}
-下圖\,\ref{fig:1}即為本程式主體程式的架構圖。
+\frametitle{程式運作流程圖}
+下圖\,\ref{fig:1}即為本程式流程圖
+
 \begin{figure}
-\includegraphics[width=1\linewidth]{function.jpg}
-\caption{Functions}
+\includegraphics[width=1\linewidth]{FOSS.png}
+\caption{流程圖}
 \label{fig:1}
 \end{figure}
 
+%\\~\\
+%{\LARGE 旨在建立一個可以根據使用者對話中顯露出的心情關鍵字或是歌手名稱等做出回應的bot。}前面是改變字體大小的範例
+
+%Sed diam enim, sagittis nec condimentum sit amet, ullamcorper sit amet libero. Aliquam vel dui orci, a porta odio. Nullam id suscipit ipsum. Aenean lobortis commodo sem, ut commodo leo gravida vitae. Pellentesque vehicula ante iaculis arcu pretium rutrum eget sit amet purus. Integer ornare nulla quis neque ultrices lobortis. Vestibulum ultrices tincidunt libero, quis commodo erat ullamcorper id.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{程式函數架構圖}
+下圖\,\ref{fig:2}即為本程式主體程式的架構圖。
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{function.jpg}
+\caption{Functions}
+\label{fig:2}
+\end{figure}
 
 %\\~\\
 %{\LARGE 旨在建立一個可以根據使用者對話中顯露出的心情關鍵字或是歌手名稱等做出回應的bot。}前面是改變字體大小的範例
@@ -175,18 +193,31 @@
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Bullet Points}
+\frametitle{使用注意事項}
 \begin{itemize}
-\item Lorem ipsum dolor sit amet, consectetur adipiscing elit
-\item Aliquam blandit faucibus nisi, sit amet dapibus enim tempus eu
-\item Nulla commodo, erat quis gravida posuere, elit lacus lobortis est, quis porttitor odio mauris at libero
-\item Nam cursus est eget velit posuere pellentesque
-\item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
+\item 僅支援純粹的文字輸入。其他比如「貼圖」、「傳送圖片」、「錄音並傳送訊息」均不支持。\\
+此部分系統會回傳已設定好的對話提醒用戶再次傳送訊息。
+\item 因為伺服器架設的網站Heroku開機時間限制。使用者第一次傳送的訊息可能因為此前過久時間無人使用程式，而導致訊息只能讓系統開機，而無法讓系統處理已傳送的訊息。
+%\item Nulla commodo, erat quis gravida posuere, elit lacus lobortis est, quis porttitor odio mauris at libero
+%\item Nam cursus est eget velit posuere pellentesque
+%\item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
 \end{itemize}
+
 \end{frame}
 
+\begin{frame}
+\frametitle{操作介面操作}
+下圖\,\ref{fig:3}即為本程式主體程式的版面展示。
+\begin{figure}
+\includegraphics[width=0.5\linewidth]{bt.png}
+\caption{Functions}
+\label{fig:3}
+\end{figure}
+
+\end{frame}
 %------------------------------------------------
 
+\begin {comment}
 \begin{frame}
 \frametitle{Blocks of Highlighted Text}
 \begin{block}{Block 1}
@@ -201,9 +232,10 @@ Pellentesque sed tellus purus. Class aptent taciti sociosqu ad litora torquent p
 Suspendisse tincidunt sagittis gravida. Curabitur condimentum, enim sed venenatis rutrum, ipsum neque consectetur orci, sed blandit justo nisi ac lacus.
 \end{block}
 \end{frame}
-
+\end{comment}
 %------------------------------------------------
 
+\begin{comment}
 \begin{frame}
 \frametitle{Multiple Columns}
 \begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
@@ -221,11 +253,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl, ul
 
 \end{columns}
 \end{frame}
-
-%------------------------------------------------
-\section{\Large心得}
+\end{comment}
 %------------------------------------------------
 
+%------------------------------------------------
+\begin{comment}
 \begin{frame}
 \frametitle{Table}
 \begin{table}
@@ -241,18 +273,18 @@ Treatment 3 & 0.0009271 & 0.296 \\
 \caption{Table caption}
 \end{table}
 \end{frame}
-
+\end{comment}
 %------------------------------------------------
-
+\begin{comment}
 \begin{frame}
 \frametitle{Theorem}
 \begin{theorem}[Mass--energy equivalence]
 $E = mc^2$
 \end{theorem}
 \end{frame}
-
+\end{comment}
 %------------------------------------------------
-
+\begin{comment}
 \begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
 \frametitle{Verbatim}
 \begin{example}[Theorem Slide Code]
@@ -265,42 +297,54 @@ $E = mc^2$
 \end{frame}\end{verbatim}
 \end{example}
 \end{frame}
-
+\end{comment}
 %------------------------------------------------
 
-\begin{frame}
-\frametitle{Figure}
-%Uncomment the code on this slide to include your own image from the same directory as the template .TeX file.
-The Fig.\,\ref{fig:1} is a test image.
-\begin{figure}
-\includegraphics[width=0.5\linewidth]{test.jpg}
-\caption{It's a test image.}
-\label{fig:1}
-\end{figure}
-\end{frame}
+%\begin{frame}
+%\frametitle{Figure}
+%%Uncomment the code on this slide to include your own image from the same directory as the template .TeX file.
+%The Fig.\,\ref{fig:1} is a test image.
+%\begin{figure}
+%\includegraphics[width=0.5\linewidth]{test.jpg}
+%\caption{It's a test image.}
+%\label{fig:1}
+%\end{figure}
+%\end{frame}
 
 %------------------------------------------------
-
+\begin{comment}
 \begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
 \frametitle{Citation}
 An example of the \verb|\cite| command to cite within the presentation:\\~
 
 This statement requires citation \cite{p1}.
 \end{frame}
-
+\end{comment}
 %------------------------------------------------
 
 \begin{frame}
 \frametitle{References}
 %\footnotesize{
-\begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
-\bibitem[Smith, 2012]{p1} John Smith (2012)
-\newblock Title of the publication
-\newblock \emph{Journal Name} 12(3), 45 -- 678.
+%\begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
+%\bibitem[Smith, 2012]{p1} John Smith (2012)
+%\newblock Title of the publication
+%\newblock \emph{Journal Name} 12(3), 45 -- 678.
 
 
-\end{thebibliography}
+%\end{thebibliography}
 %}
+\begin{enumerate} 
+	\item \textbf {LINE developers} \newline
+	https://developers.line.me/console/channel/1587699018/basic/
+	\item  \textbf {Heroku} \newline
+	https://dashboard.heroku.com
+	\item \textbf {LineBot+Python，輕鬆建立聊天機器人} \newline
+	https://yaoandy107.github.io/line-bot-tutorial/  
+	\item  \textbf {文字分析API | Microsoft Azure}  \newline
+	https://azure.microsoft.com/zh-tw/services/cognitive-services/text-analytics/
+	\item  \textbf { LINE BOT 通訊}  \newline
+	https://engineering.linecorp.com/tw/blog/detail/183
+\end{enumerate}
 \end{frame}
 
 %------------------------------------------------
