@@ -55,7 +55,7 @@ def handle_message(event):
             TextSendMessage(text=text))
         return 0
     if text == "心情模式":
-        text = "我們會根據你的心情指數來推薦歌曲"
+        text = "先輸入你現在的心情\n然後點選下方的音樂鍵\n我們會根據你的心情指數來推薦歌曲"
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=text))
