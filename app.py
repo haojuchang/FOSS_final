@@ -77,7 +77,7 @@ def handle_message(event):
     elif text.find('要') != -1 :
         temp = text.find('要')
     elif text.find('listen') != -1:
-        temp = text.find('listem')
+        temp = text.find('listen')
 
     if temp != -1:
         song = youtube.youtube()
