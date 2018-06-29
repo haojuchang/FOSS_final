@@ -43,6 +43,20 @@
 %}
 \usepackage{hyperref}
 \usepackage{pgf-umlcd}
+\usepackage{tikz}
+
+
+\tikzset{
+    state/.style={
+           rectangle,
+           rounded corners,
+           draw=black, very thick,
+           minimum height=2em,
+           inner sep=2pt,
+           text centered,
+           },
+}
+
 \begin{document}
 
 \begin{flushright}
@@ -84,7 +98,7 @@
         \hline
 	    Cindy & 06/28 & wrote five sections & 1\\
         \hline
-	    4 & 32 & 33 & 34\\
+	    Lo & 06/28 & wrote many sections & 1\\
         \hline
     \end{tabular}
 \end{center}
@@ -153,17 +167,98 @@ Microsoft Azure 中的文字分析的功用是可以對輸入文字進行情緒�
 
 \section{Product Perspective}
 \begin{CJK}{UTF8}{<font>}
-\textbf {\LARGE 這部分還沒弄Diagram圖表} \newline
-在
+\begin{tikzpicture}[->,>=stealth']
 
-$<$Describe the context and origin of the product being specified in this SRS.  
-For example, state whether this product is a follow-on member of a product 
-family, a replacement for certain existing systems, or a new, self-contained 
-product. If the SRS defines a component of a larger system, relate the 
-requirements of the larger system to the functionality of this software and 
-identify interfaces between the two. A simple diagram that shows the major 
-components of the overall system, subsystem interconnections, and external 
-interfaces can be helpful.$>$
+ % First node
+ % Use previously defined 'state' as layout (see above)
+ % use tabular for content to get columns/rows
+ % parbox to limit width of the listing
+ \node[state] (USER) 
+ {\begin{tabular}{l}
+ \textbf{USER}\\
+ \end{tabular}};
+
+
+ \node[state,       % layout (defined above)
+ node distance=6cm,     % distance to QUERY
+ text width=2.5cm,        % max text width
+ right of=USER,        % Position is to the right of QUERY
+] (LINE)    % move 3cm in y
+ {%                     % posistion relative to the center of the 'box'
+ \begin{tabular}{l}     % content
+  \textbf{Line}\\
+  message API
+ \end{tabular}
+ };
+
+ \node[state,
+ right of=LINE,
+ node distance=5cm,
+ text width=3cm] (HEROKU) 
+ {%
+ \begin{tabular}{l}
+  \textbf{HEROKU}\\
+ \end{tabular}
+ };
+
+\node[state,
+ below  of=HEROKU,
+ node distance=3cm,
+ text width=3cm] (YOUTUBE) 
+ {%
+ \begin{tabular}{l}
+  \textbf{YOUTUBE}\\
+ \end{tabular}
+ };
+
+ \node[state,
+ left  of=YOUTUBE,
+ node distance=5cm,
+ text width=4cm] (GoogleTranslater) 
+ {%
+ \begin{tabular}{l}
+  \textbf{GoogleTranslater}\\
+ \end{tabular}
+ };
+
+  \node[state,
+ left  of=GoogleTranslater,
+ node distance=6cm,
+ text width=4cm] (MoodDeterminer) 
+ {%
+ \begin{tabular}{l}
+  \textbf{MoodDeterminer}\\
+ \end{tabular}
+ };
+
+
+ \path(USER)edge(LINE)
+ (LINE)edge(USER)
+ (LINE)edge(HEROKU)
+  (HEROKU)edge(LINE)
+ (HEROKU)edge(YOUTUBE)
+  (YOUTUBE)edge(HEROKU)
+ (HEROKU)edge(GoogleTranslater)
+ (GoogleTranslater)edge(MoodDeterminer)
+ (MoodDeterminer)edge(HEROKU);
+
+ ;
+\end{tikzpicture}
+% $<$Describe the context and origin of the product being specified in this SRS.  
+% For example, state whether this product is a follow-on member of a product 
+% family, a replacement for certain existing systems, or a new, self-contained 
+% product. If the SRS defines a component of a larger system, relate the 
+% requirements of the larger system to the functionality of this software and 
+% identify interfaces between the two. A simple diagram that shows the major 
+% components of the overall system, subsystem interconnections, and external 
+% interfaces can be helpful.$>$
+\\
+\\
+首先，使用者經由line對本程式輸入，輸入資料透過line api傳到我們在heroku上的伺服
+器，接著判斷資料是否含有「想聽」之類的關鍵字，若有的話將直接爬取youtube上的音樂
+mv網址，並一路回傳至user，如果沒有的話，會將輸入資料先丟置google translater，
+並將其回傳值丟到Azure的語意辨識網站，取得評分後會依據評分回傳相應心情曲庫中的音樂mv網址給
+使用者，當作推薦音樂回傳。
 \end{CJK}
 
 \section{Product Functions}
@@ -198,8 +293,8 @@ interfaces can be helpful.$>$
 \unidirectionalAssociation{app}{}{}{GoogleTranslater}
 \unidirectionalAssociation{app}{}{}{youtube}
 \end{tikzpicture}
-
 \end{CJK}
+
 
 \section{User Classes and Characteristics}
 \begin{CJK}{UTF8}{<font>}
