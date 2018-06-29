@@ -103,6 +103,23 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, template_message)
         return 0
 
+    songs = [[], [], []]
+    inFile = open("song1.txt", "r")
+    
+    inFile.readline()
+    for i in range(8):
+        songs[0].append(inFile.readline())	
+    inFile.readline()
+    for i in range(8):
+        songs[1].append(inFile.readline())
+    inFile.readline()
+    for i in range(8):
+        songs[2].append(inFile.readline())
+	
+    inFile.close()
+
+    rd = random.randint(1, 8)
+	
     translater = GoogleTranslater()
     determiner = MoodDeterminer()
 	
@@ -110,8 +127,18 @@ def handle_message(event):
     receive = translater.getText()
 
     determiner.sendText(receive)
-    result = determiner.getText()
+    result = int(determiner.getText()[:-1])
 
+    mood = "開心的歌"
+	
+    sug = 2
+    if result < 33:
+        sug = 0
+        mood = "一般的歌"	
+    elif result < 66:
+        sug = 1
+        mood = "不爽的歌"
+	
     buttons_template = TemplateSendMessage(
         alt_text='目錄 template',
         template=ButtonsTemplate(
@@ -132,8 +159,8 @@ def handle_message(event):
                     text='關於我們'
                 ),
 		MessageTemplateAction(
-                    label='心情',
-                    text=result
+                    label=mood,
+                    text=songs[sug][rd]
                 )
             ]
         )
