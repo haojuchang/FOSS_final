@@ -42,6 +42,7 @@
 
 %}
 \usepackage{hyperref}
+\usepackage{pgf-umlcd}
 \begin{document}
 
 \begin{flushright}
@@ -107,12 +108,12 @@
 
 \section{Intended Audience and Reading Suggestions}
 \begin{CJK}{UTF8}{<font>}
-       $<$Describe the different types of reader that the document is intended for, 
-such as developers, project managers, marketing staff, users, testers, and 
-documentation writers. Describe what the rest of this SRS contains and how it is 
-organized. Suggest a sequence for reading the document, beginning with the 
-overview sections and proceeding through the sections that are most pertinent to 
-each reader type.$>$
+此份文件主要是給開發人員、產品經理人、以及未來的維護人員當作軟體開發時的參考依
+據用的，不論是產品的需求、架構、效能......等都包含在此文件內，建議觀看方式為從
+頭看到尾。若閱讀者為測試人員，須了解此程式能接收的輸入，以及此程式的需求，則可
+以參考Product Functions、User Classes and Characteristics、Business Rules
+以及User Documentati等部分。若閱讀者是使用者的話，可以直接參考User Documentation
+的部分。
 \end{CJK}
 
 \section{Project Scope}
@@ -167,19 +168,43 @@ interfaces can be helpful.$>$
 
 \section{Product Functions}
 \begin{CJK}{UTF8}{<font>}
-$<$Summarize the major functions the product must perform or must let the user 
-perform將主要需要使產品運作的或需要使用者觸發的函數做個總結. Details will be provided in Section 3這部分的細目會在Section3中呈現, so only a high level summary所以不用寫得太細 
-(such as a bullet list比如使用項目清單) is needed here. Organize the functions to make them 
-understandable to any reader of the SRS在可以讓所有閱讀者了解的情況下. A picture
- of the major groups of 
-related requirements functions and how they relate一張呈現主要需求的函式與他們之間關係的圖表, such as a top level data flow diagram 
-or object class diagram, is often effective.$>$
+
+\begin{tikzpicture}% [ show background grid ]
+\begin{class}[text width=3cm]{youtube}{5 ,-5}
+\attribute{- redata}
+\operation{+ search(text)}
+\end{class}
+
+\begin{class}[text width=5cm]{MoodDeterminer}{0.5 ,-5}
+\attribute{- driver }
+\operation{+ sendText(text)}
+\operation{+ getText()}
+\end{class}
+
+\begin{class}[text width=5cm]{GoogleTranslater}{-5 ,-5}
+\attribute{- driver }
+\operation{+ sendText(text)}
+\operation{+ getText()}
+\end{class}
+
+\begin{class}[text width=5cm]{app}{0 ,0}
+\attribute{- line_bot_api}
+\attribute{- handler}
+\operation{+ callback()}
+\operation{+ handle_message()}
+\end{class}
+
+\unidirectionalAssociation{app}{}{}{MoodDeterminer}
+\unidirectionalAssociation{app}{}{}{GoogleTranslater}
+\unidirectionalAssociation{app}{}{}{youtube}
+\end{tikzpicture}
+
 \end{CJK}
 
 \section{User Classes and Characteristics}
 \begin{CJK}{UTF8}{<font>}
-本line bot預期的主要用戶為年輕人、line的中文用戶，因此本line bot推薦的音樂主要
-為中文的流行歌曲，並且在輸入方面也要求中文輸入。
+本line bot預期的主要用戶為18到34歲的年輕人、line的中文用戶，因此本line bot推薦的音樂主要
+為中文及英文的流行歌曲，並且在輸入方面也要求中文輸入。
 \end{CJK}
 
 \section{Operating Environment}
@@ -223,11 +248,8 @@ specification.$>$
 
 \section{Hardware Interfaces}
 \begin{CJK}{UTF8}{<font>}
-$<$Describe the logical and physical characteristics of each interface between 
-the software product and the hardware components of the system. This may include 
-the supported device types, the nature of the data and control interactions 
-between the software and the hardware, and communication protocols to be 
-used.$>$
+本程式可在任何能實裝line的系統上運作，在輸入時需用到鍵盤，而在歌曲推薦時使用的
+版面配置需用到左滑及右滑的功能，因此建議在手機或是平板等裝置上使用本程式。
 \end{CJK}
 
 \section{Software Interfaces}
@@ -305,10 +327,10 @@ REQ-1:	REQ-2:
 
 \section{Performance Requirements}
 \begin{CJK}{UTF8}{<font>}
-由於本程式的將伺服器建置在heroku的免費平台上，因此，倘若在30分鐘以內皆無使
+由於本程式的伺服器建置在heroku的免費平台上，因此，倘若在30分鐘以內皆無使
 用者對此程式進行輸入，則伺服器會自動關機，並在下一次接收到輸入時才重新啟動，所
 以使用者第一次輸入時可能會有5~10秒的延遲時間。另外，因本程式在伺服器端主要運算
-皆仰賴於爬蟲，所以如果同始有多位使用者進行輸入會造成伺服器頻繁的項目標網站送出
+皆仰賴於爬蟲，所以如果同始有多位使用者進行輸入會造成伺服器頻繁的向目標網站送出
 請求，可能會導致伺服器產生錯誤，無法正確回應使用者。
 \end{CJK}
 
@@ -328,19 +350,24 @@ REQ-1:	REQ-2:
 
 \section{Software Quality Attributes}
 \begin{CJK}{UTF8}{<font>}
-$<$Specify any additional quality characteristics for the product that will be 
-important to either the customers or the developers. Some to consider are: 
-adaptability, availability, correctness, flexibility, interoperability, 
-maintainability, portability, reliability, reusability, robustness, testability, 
-and usability. Write these to be specific, quantitative, and verifiable when 
-possible. At the least, clarify the relative preferences for various attributes, 
-such as ease of use over ease of learning.$>$
+    \begin{enumerate} 
+    \item \textbf {Reliability 可靠性} \newline
+    本程式所使用的心情辨識以及翻譯系統皆仰賴於爬取外部網站的資料，且伺服器建置於
+    heroku的免費平台上，因此本程式輸出的正確性皆由外部網站決定，並且隨著使用者的增
+    加，伺服器也會更頻繁地向目標網站送出請求，從而導致可靠性也跟著降低。
+    \item \textbf {Availability 可行性} \newline
+    本程式的僅需做爬取特定網頁的資料以及部屬伺服器，因此可行性極高。
+    \item \textbf {Portability 可移植性} \newline
+    本程式主要建立在line的平台上，因此需用到line本身提供的api，若要移植本程式，需
+    在額外撰寫別的聊天平台所提供的api。
+    \end{enumerate}
 \end{CJK}
 
 \section{Business Rules}
 \begin{CJK}{UTF8}{<font>}
-
-$<$List any operating principles about the product, such as which individuals or roles can perform which functions under specific circumstances. These are not  functional requirements in themselves, but they may imply certain functional  requirements to enforce the rules.$>$
+若使用者告訴line bot想聽某歌手的音樂，則line bot會幫使用者找幾首該歌手的音樂，
+若使用者只是單純地想與line bot抒發心情，則line bot會依照使用者語氣地不同而推薦
+不同的歌曲。
 \end{CJK}
 
 
