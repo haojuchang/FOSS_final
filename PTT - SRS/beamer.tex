@@ -91,19 +91,33 @@
 
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
-
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{underscore}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{CJKutf8}
+\usepackage{hyperref}
+\usepackage{pgf-umlcd}
 
 
 %----------------------------------------------------------------------------------------
 %   TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title[Short title]{心情機器人} % The short title appears at the bottom of every slide, the full title is only on the title page
+\title[Short title]{FunMusic} % The short title appears at the bottom of every slide, the full title is only on the title page
 
-\author{開放平台軟體} % Your name
+\author{
+1040914 羅皓煒\\
+1041509 吳泰德\\
+1041513 白恬安\\
+1041514 張皓儒\\ 
+1043355 劉泳儀\\} % Your name
 \institute[UCLA] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
 {
-University of California \\ % Your institution for the title page
+\large 元智大學-開放平台軟體課程\\ % Your institution for the title page
 \medskip
 %\textit{john@smith.com} % Your email address
 }
@@ -116,26 +130,42 @@ University of California \\ % Your institution for the title page
 \titlepage % Print the title page as the first slide
 \end{frame}
 
-\begin{frame}
-\frametitle{目錄} % Table of contents slide, comment this block out to remove it
-\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
-\end{frame}
-
 %----------------------------------------------------------------------------------------
 %   PRESENTATION SLIDES
 %----------------------------------------------------------------------------------------
+
+\begin{frame}
+
+\frametitle{專題想法說明} % Table of contents slide, comment this block out to remove it
+\begin{block}{目標1}
+根據使用者在對話框輸入的文字，用演算法判斷對方當下的心情、情緒如何。藉由分成三種情緒，Happy、Normal、Sad，自對應歌曲庫隨機回傳一首歌的連結。此部分希望可以達到撫慰使用者情緒的目的。
+\end{block}
+
+\begin{block}{目標2}
+根據使用者在對話框輸入的歌手名稱，自YouTube網頁上搜尋相對應的歌手名稱，並將連結回傳予使用者。
+\end{block}
+\end{frame}
+
+
 %------------------------------------------------
-\section{\Large 專題內容} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+%\section{\Large 專題目標} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
 %Second Section不可以擺這，這樣Subsection 會變到它的正下方
 %------------------------------------------------
 
-\subsection{\large 想法來源} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
-\subsection{\large 程式解說}
-\subsection{\large 實作結果呈現}
-%不知道如何消除兩個Section之間的巨大間隔
+%\subsection{\large 想法來源} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
+%\subsection{\large 程式解說}
+%\subsection{\large 實作結果呈現}
 
 \begin{frame}
-\frametitle{想法來源}
+\frametitle{程式函數架構圖}
+下圖\,\ref{fig:1}即為本程式主體程式的架構圖。
+\begin{figure}
+\includegraphics[width=1\linewidth]{function.jpg}
+\caption{Functions}
+\label{fig:1}
+\end{figure}
+
+
 %\\~\\
 %{\LARGE 旨在建立一個可以根據使用者對話中顯露出的心情關鍵字或是歌手名稱等做出回應的bot。}前面是改變字體大小的範例
 
