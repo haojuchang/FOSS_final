@@ -25,8 +25,22 @@ app = Flask(__name__)
 line_bot_api = LineBotApi('RIMmaonvD7Bi/W4guIsCuwrLAXFqtHgYFWmF+/c8mIgnF7FzZsScZLVF223lEJH2jdbpyM/+NXn0oJSbWpZGrIDEwfu/qv6GTd/GCs0yFGhPIuEtIMkgQczguukg60DnOyv9xLF1NIvjxDlqwyMwbQdB04t89/1O/w1cDnyilFU=')  # Your Channel Access Token
 handler = WebhookHandler('2b7ac49c414175ad1fc3c72595f5731f')  # Your Channel Secret
 
+song = youtube.youtube()
 translater = GoogleTranslater()
 determiner = MoodDeterminer()
+
+songs = [[], [], []]
+inFile = open("song1.txt", "r")
+inFile.readline()
+for i in range(8):
+    songs[0].append(inFile.readline())	
+inFile.readline()
+for i in range(8):
+    songs[1].append(inFile.readline())
+inFile.readline()
+for i in range(8):
+    songs[2].append(inFile.readline())
+inFile.close()
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -88,7 +102,6 @@ def handle_message(event):
         temp = text.find('look')
 
     if temp != -1:
-        song = youtube.youtube()
         song_data = song.search(text[temp:])
         carousel_template = CarouselTemplate(columns=[
             CarouselColumn(
@@ -116,28 +129,11 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, template_message)
         return 0
 
-    songs = [[], [], []]
-    inFile = open("song1.txt", "r")
-    
-    inFile.readline()
-    for i in range(8):
-        songs[0].append(inFile.readline())	
-    inFile.readline()
-    for i in range(8):
-        songs[1].append(inFile.readline())
-    inFile.readline()
-    for i in range(8):
-        songs[2].append(inFile.readline())
-	
-    inFile.close()
+
 
     rd = random.randint(1, 8)
-	
-
-	
     translater.sendText(text)
     receive = translater.getText()
-
     determiner.sendText(receive)
     result = int(determiner.getText()[:-1])
 
