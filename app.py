@@ -30,6 +30,7 @@ translater = GoogleTranslater()
 determiner = MoodDeterminer()
 
 songs = [[], [], []]
+rd, sug, mood = None, None, None
 inFile = open("song1.txt", "r")
 inFile.readline()
 for i in range(8):
@@ -82,6 +83,12 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text=text))
         return 0
+    if (text == "開心的歌" or text == "一般的歌" or text == "不爽的歌") and mood != None:
+        text = songs[sug][rd]
+	line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=text))
+        return 0
 
     temp = -1
     if text.find('聽') != -1 :
@@ -128,23 +135,18 @@ def handle_message(event):
         template_message = TemplateSendMessage(alt_text='Carousel alt text', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
         return 0
-
-
-
-    rd = random.randint(1, 8)
+    
     translater.sendText(text)
     receive = translater.getText()
     determiner.sendText(receive)
     result = int(determiner.getText()[:-1])
-
-    mood = "開心的歌"
-    sug = 2
+    
+    rd = random.randint(1, 8)
+    sug, mood = 2, "開心的歌"
     if result < 66:
-        sug = 1
-        mood = "一般的歌"	
+        sug, mood = 1, "一般的歌"
     if result < 33:
-        sug = 0
-        mood = "不爽的歌"
+        sug, mood = 0, "不爽的歌"
 	
     buttons_template = TemplateSendMessage(
         alt_text='目錄 template',
@@ -167,7 +169,7 @@ def handle_message(event):
                 ),
 		MessageTemplateAction(
                     label=mood,
-                    text=songs[sug][rd]
+                    text=mood
                 )
             ]
         )
