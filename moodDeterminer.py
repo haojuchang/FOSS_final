@@ -17,7 +17,7 @@ class MoodDeterminer():
 		self.source.clear()
 		self.source.send_keys(text)
 		self.driver.find_element_by_css_selector(".button.button-primary.full-row-width-button").click()
-		time.sleep(5)
+		time.sleep(2)
 	def getText(self):
 		self.wait = WebDriverWait(self.driver, 10)
 		return self.wait.until(EC.presence_of_all_elements_located((By.XPATH, "//div[@class='absolutely-centered']")))[0].text
