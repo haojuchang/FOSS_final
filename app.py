@@ -63,6 +63,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    global rd, sug, mood
     text = event.message.text  # message from user
 
     if text == "搜歌模式":
